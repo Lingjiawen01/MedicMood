@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MedicMood.Views.Clockpage"
+             xmlns:views="clr-namespace:MedicMood.Views"
+             Title="Clock">
+
+    <ScrollView>
+
+        <StackLayout>
+            <ImageButton Source="setting.png"
+            CornerRadius="35"
+            HeightRequest="100"
+            WidthRequest="40"
+            HorizontalOptions="End"
+            Clicked="OnButtonClicked">
+            </ImageButton>
+        </StackLayout>
+
+    </ScrollView>
+</ContentPage>
