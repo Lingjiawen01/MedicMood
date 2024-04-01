@@ -3,19 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MedicMood.Views.Clockpage"
              xmlns:views="clr-namespace:MedicMood.Views"
-             Title="Clock">
+             xmlns:helpers="clr-namespace:MedicMood.Helpers" 
+             Title="Clock"
+             Padding="15">
 
     <ScrollView>
 
         <StackLayout>
-            <ImageButton Source="setting.png"
-            CornerRadius="35"
-            HeightRequest="100"
-            WidthRequest="40"
+            <Button BackgroundColor="DeepSkyBlue"
+            CornerRadius="45"
+            HeightRequest="32"
+            WidthRequest="32"
             HorizontalOptions="End"
             Clicked="OnButtonClicked">
-            </ImageButton>
+                <Button.ImageSource>
+                    <FontImageSource
+                    FontFamily="FAS"
+                    Glyph="{x:Static helpers:FontAwesomeHelper.Plus}"
+                    Size="18" />
+                </Button.ImageSource>
+            </Button>
         </StackLayout>
+        
+        
 
     </ScrollView>
 </ContentPage>
