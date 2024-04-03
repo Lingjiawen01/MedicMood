@@ -1,8 +1,8 @@
 namespace MedicMood.Views;
 
-public partial class SettingPage : ContentPage
+public partial class AddPage : ContentPage
 {
-	public SettingPage()
+	public AddPage()
 	{
 		InitializeComponent();
 	}

@@ -5,27 +5,67 @@
              xmlns:views="clr-namespace:MedicMood.Views"
              xmlns:helpers="clr-namespace:MedicMood.Helpers" 
              Title="Clock"
-             Padding="15">
+             Padding="20">
 
     <ScrollView>
 
         <StackLayout>
-            <Button BackgroundColor="DeepSkyBlue"
-            CornerRadius="45"
-            HeightRequest="32"
-            WidthRequest="32"
-            HorizontalOptions="End"
-            Clicked="OnButtonClicked">
+            <Button BackgroundColor="LightSteelBlue"
+                    CornerRadius="45"
+                    HeightRequest="32"
+                    WidthRequest="32"
+                    HorizontalOptions="End">
                 <Button.ImageSource>
                     <FontImageSource
-                    FontFamily="FAS"
-                    Glyph="{x:Static helpers:FontAwesomeHelper.Plus}"
-                    Size="18" />
+                        FontFamily="FAS"
+                        Glyph="{x:Static helpers:FontAwesomeHelper.Gear}"
+                        Size="18" />
                 </Button.ImageSource>
             </Button>
+
+
+            <Grid ColumnDefinitions="*,150,*"
+                  RowDefinitions="Auto,*,Auto"
+                  BackgroundColor="DeepSkyBlue">
+                <VerticalStackLayout Grid.Row="1"
+                                     Grid.Column="1"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     Spacing="10">
+                    
+                    <Label Text="1750 Am"
+                           FontSize="25"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+
+                    <Button Text="Add Alarm"
+                            BackgroundColor="LightSteelBlue"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            CornerRadius="22"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Padding="50,0"
+                            Clicked="OnButtonClicked"/>
+                </VerticalStackLayout>
+
+            </Grid>
+
+            <StackLayout Margin="20">
+                <!--<ListView x:Name="alarmListView"
+              ItemSelected="OnAlarmItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding TimeString}"
+                          Detail="{Binding Note}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>-->
+
+            </StackLayout>
+
         </StackLayout>
-        
-        
 
     </ScrollView>
 </ContentPage>
