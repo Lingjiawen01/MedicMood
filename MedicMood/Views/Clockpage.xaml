@@ -5,7 +5,8 @@
              xmlns:views="clr-namespace:MedicMood.Views"
              xmlns:helpers="clr-namespace:MedicMood.Helpers" 
              Title="Clock"
-             Padding="20">
+             Padding="20"
+             BackgroundColor="#B6D0E2">
 
     <ScrollView>
 
@@ -31,14 +32,60 @@
                                      Grid.Column="1"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center"
-                                     Spacing="10">
-                    
-                    <Label Text="1750 Am"
+                                     Spacing="20">
+
+                    <ListView x:Name="alarmListView">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding Label}" Detail="{Binding Time}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Button Clicked="OnButtonClicked">
+                        <Button.ImageSource>
+                            <FontImageSource
+                                FontFamily="FAS"
+                                Glyph="{x:Static helpers:FontAwesomeHelper.Plus}"
+                                Size="30" />
+                        </Button.ImageSource>
+                    </Button>
+                    <Button Clicked="DeleteAlarm_Clicked" >
+                        <Button.ImageSource>
+                            <FontImageSource
+                                FontFamily="FAS"
+                                Glyph="{x:Static helpers:FontAwesomeHelper.TrashCan}"
+                                Size="25" />
+                        </Button.ImageSource>
+
+                    </Button>
+
+
+                    <!--<Label Text="1750 Am"
                            FontSize="25"
                            FontAttributes="Bold"
                            VerticalOptions="Center"/>
 
-                    <Button Text="Add Alarm"
+                    <Button HorizontalOptions="End"
+                            Clicked="DeleteAlarm_Clicked">
+                        <Button.ImageSource>
+                            <FontImageSource
+                                FontFamily="FAS"
+                                Glyph="{x:Static helpers:FontAwesomeHelper.Trash}"
+                                Size="18" />
+                        </Button.ImageSource>
+                    </Button>
+                    --><!-- Add a ListView to display the list of alarms --><!--
+                    <ListView ItemsSource="{Binding Alarms}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                --><!-- Define the alarm item layout --><!--
+                                <TextCell Text="{Binding Label}" Detail="{Binding Time}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>-->
+
+                    <!--<Button Text="Add Alarm"
                             BackgroundColor="LightSteelBlue"
                             TextColor="Black"
                             FontAttributes="Bold"
@@ -46,24 +93,10 @@
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
                             Padding="50,0"
-                            Clicked="OnButtonClicked"/>
+                            Clicked="OnButtonClicked"/>-->
                 </VerticalStackLayout>
 
             </Grid>
-
-            <StackLayout Margin="20">
-                <!--<ListView x:Name="alarmListView"
-              ItemSelected="OnAlarmItemSelected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding TimeString}"
-                          Detail="{Binding Note}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-
-                </ListView>-->
-
-            </StackLayout>
 
         </StackLayout>
 
