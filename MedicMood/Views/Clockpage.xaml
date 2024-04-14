@@ -10,24 +10,34 @@
 
     <ScrollView>
 
-        <StackLayout>
-            <Button BackgroundColor="LightSteelBlue"
-                    CornerRadius="45"
-                    HeightRequest="32"
-                    WidthRequest="32"
-                    HorizontalOptions="End">
-                <Button.ImageSource>
-                    <FontImageSource
-                        FontFamily="FAS"
-                        Glyph="{x:Static helpers:FontAwesomeHelper.Gear}"
-                        Size="18" />
-                </Button.ImageSource>
-            </Button>
+        <StackLayout Orientation="Vertical">
+            
+            <Label x:Name="currentTimeLabel" 
+                   Text="00:00:00" 
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="DarkGrey"
+                   FontSize="30"
+                   FontFamily="Montserrat"/>
 
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                <Button BackgroundColor="LightSteelBlue"
+                CornerRadius="45"
+                HeightRequest="32"
+                WidthRequest="32">
+
+                    <Button.ImageSource>
+                        <FontImageSource
+                    FontFamily="FAS"
+                    Glyph="{x:Static helpers:FontAwesomeHelper.Gear}"
+                    Size="18" />
+                    </Button.ImageSource>
+                </Button>
+            </StackLayout>
 
             <Grid ColumnDefinitions="*,150,*"
                   RowDefinitions="Auto,*,Auto"
-                  BackgroundColor="DeepSkyBlue">
+                  BackgroundColor="#2CB5E0">
                 <VerticalStackLayout Grid.Row="1"
                                      Grid.Column="1"
                                      HorizontalOptions="Center"
@@ -42,7 +52,8 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <Button Clicked="OnButtonClicked">
+                    <Button Clicked="OnButtonClicked"
+                            BackgroundColor="#00A4D7">
                         <Button.ImageSource>
                             <FontImageSource
                                 FontFamily="FAS"
@@ -50,12 +61,13 @@
                                 Size="30" />
                         </Button.ImageSource>
                     </Button>
-                    <Button Clicked="DeleteAlarm_Clicked" >
+                    <Button Clicked="DeleteAlarm_Clicked" 
+                            BackgroundColor="#00A4D7">
                         <Button.ImageSource>
                             <FontImageSource
                                 FontFamily="FAS"
-                                Glyph="{x:Static helpers:FontAwesomeHelper.TrashCan}"
-                                Size="25" />
+                                Glyph="{x:Static helpers:FontAwesomeHelper.Trash}"
+                                Size="30" />
                         </Button.ImageSource>
 
                     </Button>

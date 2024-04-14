@@ -51,6 +51,7 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\clock.png" />
 	  <None Remove="Resources\Images\dashboard.png" />
+	  <None Remove="Resources\Images\rubbishbin.png" />
 	  <None Remove="Resources\Images\setting.png" />
 	</ItemGroup>
 

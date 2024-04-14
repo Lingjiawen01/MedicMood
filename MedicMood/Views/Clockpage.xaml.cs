@@ -10,6 +10,7 @@ public partial class Clockpage : ContentPage
     {
         InitializeComponent();
         LoadAlarms();
+        StartTimerToUpdateTime();
     }
 
     private void LoadAlarms()
@@ -19,6 +20,23 @@ public partial class Clockpage : ContentPage
 
         // Update ListView with alarms
         alarmListView.ItemsSource = Alarms;
+    }
+
+    [Obsolete]
+    private void StartTimerToUpdateTime()
+    {
+        Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+        {
+            // 更新手机时间
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                // 设置 Label 的文本为当前手机时间
+                currentTimeLabel.Text = DateTime.Now.ToString("HH:mm:ss");
+            });
+
+            // 返回 true 以继续循环
+            return true;
+        });
     }
 
     private void OnButtonClicked(object sender, EventArgs e)
