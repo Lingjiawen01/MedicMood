@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MedicMood.Views"
              x:Class="MedicMood.Views.AddPage">
-    
+             
+
     <VerticalStackLayout>
         <StackLayout Padding="20">
             <Label Text="Set Alarm" FontSize="24" HorizontalOptions="Center" />

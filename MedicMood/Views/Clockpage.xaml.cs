@@ -39,19 +39,10 @@ public partial class Clockpage : ContentPage
         });
     }
 
-    private void OnButtonClicked(object sender, EventArgs e)
+    private async void OnButtonClicked(object sender, EventArgs e)
     {
-        // 创建一个新的闹钟并将其添加到列表中，标签设置为"Alarm {nextAlarmNumber}"
-        Alarm newAlarm = new Alarm { Label = $"Alarm {nextAlarmNumber}", Time = DateTime.Now.AddHours(1), IsActive = true };
-        Alarms.Add(newAlarm);
         // Navigate to the AddPage when the button is clicked, add alarm button
-        //Navigation.PushAsync(new AddPage());
-
-        alarmListView.ItemsSource = null; // Refresh ListView
-        alarmListView.ItemsSource = Alarms;
-
-        // 增加下一个闹钟的编号
-        nextAlarmNumber++;
+        await Navigation.PushAsync(new AddPage (Alarms, nextAlarmNumber));
     }
     private void DeleteAlarm_Clicked(object sender, EventArgs e)
     {
@@ -60,9 +51,14 @@ public partial class Clockpage : ContentPage
         {
             Alarms.Remove((Alarm)alarmListView.SelectedItem);
             alarmListView.SelectedItem = null; // Clear selection
-            alarmListView.ItemsSource = null; // Refresh ListView
-            alarmListView.ItemsSource = Alarms;
         }
-
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        // Refresh ListView when page appears
+        alarmListView.ItemsSource = null;
+        alarmListView.ItemsSource = Alarms;
+    }
+
 }
