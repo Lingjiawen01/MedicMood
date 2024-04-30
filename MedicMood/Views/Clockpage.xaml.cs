@@ -9,6 +9,7 @@ public partial class Clockpage : ContentPage
     public Clockpage()
     {
         InitializeComponent();
+        Alarms = new List<Alarm>();
         LoadAlarms();
         StartTimerToUpdateTime();
     }
@@ -17,6 +18,10 @@ public partial class Clockpage : ContentPage
     {
         // Load no sample alarms (replace with actual data retrieval logic)
         Alarms = new List<Alarm>();
+        {
+            new Alarm { Label = "Alarm 1", Time = DateTime.Now.AddHours(1), IsActive = true };
+            new Alarm { Label = "Alarm 2", Time = DateTime.Now.AddHours(2), IsActive = true };
+        };
 
         // Update ListView with alarms
         alarmListView.ItemsSource = Alarms;

@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MedicMood.Views"
              x:Class="MedicMood.Views.AddPage">
-             
 
-    <VerticalStackLayout>
+
+    <StackLayout>
         <StackLayout Padding="20">
             <Label Text="Set Alarm" FontSize="24" HorizontalOptions="Center" />
 
@@ -15,7 +15,22 @@
 
             <Button Text="Set Alarm" Clicked="SetAlarmButton_Clicked" />
             <Button Text="Cancel Alarm" Clicked="CancelAlarmButton_Clicked" />
+
+            <Label Text="Repeat" />
+            <Button Text="Repeat" Clicked="RepeatButton_Clicked" />
+            <StackLayout x:Name="repeatOptions" IsVisible="False">
+                <!-- 在用户点击 Repeat 按钮后显示的重复日期选项 -->
+                <Button Text="Monday" Clicked="ButtonMonday_Clicked" />
+                <Button Text="Tuesday" Clicked="ButtonTuesday_Clicked" />
+                <Button Text="Wednesday" Clicked="ButtonWednesday_Clicked" />
+                <Button Text="Thursday" Clicked="ButtonThursday_Clicked" />
+                <Button Text="Friday" Clicked="ButtonFriday_Clicked" />
+                <Button Text="Saturday" Clicked="ButtonSaturday_Clicked" />
+                <Button Text="Sunday" Clicked="ButtonSunday_Clicked" />
+
+            </StackLayout>
+
         </StackLayout>
 
-    </VerticalStackLayout>
+    </StackLayout>
 </ContentPage>
