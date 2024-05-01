@@ -30,6 +30,18 @@
 
             </StackLayout>
 
+            <!-- Sound selection -->
+            <Label Text="Select Sound:" />
+            <Picker x:Name="soundPicker">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Sound 1</x:String>
+                        <x:String>Sound 2</x:String>
+                        <!-- Add more sound options here -->
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
         </StackLayout>
 
     </StackLayout>

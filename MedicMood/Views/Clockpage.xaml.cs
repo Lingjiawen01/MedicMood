@@ -9,7 +9,6 @@ public partial class Clockpage : ContentPage
     public Clockpage()
     {
         InitializeComponent();
-        Alarms = new List<Alarm>();
         LoadAlarms();
         StartTimerToUpdateTime();
     }
@@ -56,6 +55,8 @@ public partial class Clockpage : ContentPage
         {
             Alarms.Remove((Alarm)alarmListView.SelectedItem);
             alarmListView.SelectedItem = null; // Clear selection
+            alarmListView.ItemsSource = null; // Refresh ListView
+            alarmListView.ItemsSource = Alarms;
         }
     }
     protected override void OnAppearing()

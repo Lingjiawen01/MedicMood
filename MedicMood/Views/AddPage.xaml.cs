@@ -23,6 +23,9 @@ public partial class AddPage : ContentPage
         // 获取用户选择的日期和时间
         DateTime alarmDateTime = alarmDatePicker.Date + alarmTimePicker.Time;
 
+        // 获取用户选择的声音
+        string selectedSound = soundPicker.SelectedItem as string;
+
         // 设置闹钟并检查是否成功
         bool isSuccess = alarmService.SetAlarm(alarmDateTime);
 
