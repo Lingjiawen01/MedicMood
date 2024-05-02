@@ -59,6 +59,7 @@
 		<PackageReference Include="FontAwesome" Version="4.7.0" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Plugin.Maui.Calendar" Version="1.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -68,6 +69,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\calender.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Clockpage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
