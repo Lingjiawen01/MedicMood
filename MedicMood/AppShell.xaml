@@ -17,7 +17,7 @@
 
         <Tab Title="Dashboard"
              Icon="dashboard.png">
-            <ShellContent ContentTemplate="{DataTemplate views:Dashboard}"/>
+            <ShellContent ContentTemplate="{DataTemplate views:calender}"/>
         </Tab>
 
     </TabBar>
