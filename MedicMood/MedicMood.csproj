@@ -57,6 +57,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="FontAwesome" Version="4.7.0" />
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.4" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Plugin.Maui.Calendar" Version="1.0.3" />

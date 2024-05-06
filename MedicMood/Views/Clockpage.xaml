@@ -11,7 +11,7 @@
     <ScrollView>
 
         <StackLayout Orientation="Vertical">
-            
+
             <Label x:Name="currentTimeLabel" 
                    Text="00:00:00" 
                    HorizontalOptions="Center"
@@ -22,15 +22,15 @@
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="End">
                 <Button BackgroundColor="LightSteelBlue"
-                CornerRadius="45"
-                HeightRequest="32"
-                WidthRequest="32">
+                    CornerRadius="45"
+                    HeightRequest="32"
+                    WidthRequest="32">
 
                     <Button.ImageSource>
                         <FontImageSource
-                    FontFamily="FAS"
-                    Glyph="{x:Static helpers:FontAwesomeHelper.Gear}"
-                    Size="18" />
+                        FontFamily="FAS"
+                        Glyph="{x:Static helpers:FontAwesomeHelper.Gear}"
+                        Size="18" />
                     </Button.ImageSource>
                 </Button>
             </StackLayout>
@@ -44,13 +44,15 @@
                                      VerticalOptions="Center"
                                      Spacing="20">
 
-                    <ListView x:Name="alarmListView">
+                    <ListView x:Name="alarmListView"
+                              ItemSelected="OnAlarmItemSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextCell Text="{Binding Label}" Detail="{Binding Time}" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+
 
                     <Button Clicked="OnButtonClicked"
                             BackgroundColor="#00A4D7">
@@ -61,51 +63,7 @@
                                 Size="30" />
                         </Button.ImageSource>
                     </Button>
-                    <Button Clicked="DeleteAlarm_Clicked" 
-                            BackgroundColor="#00A4D7">
-                        <Button.ImageSource>
-                            <FontImageSource
-                                FontFamily="FAS"
-                                Glyph="{x:Static helpers:FontAwesomeHelper.Trash}"
-                                Size="30" />
-                        </Button.ImageSource>
 
-                    </Button>
-
-
-                    <!--<Label Text="1750 Am"
-                           FontSize="25"
-                           FontAttributes="Bold"
-                           VerticalOptions="Center"/>
-
-                    <Button HorizontalOptions="End"
-                            Clicked="DeleteAlarm_Clicked">
-                        <Button.ImageSource>
-                            <FontImageSource
-                                FontFamily="FAS"
-                                Glyph="{x:Static helpers:FontAwesomeHelper.Trash}"
-                                Size="18" />
-                        </Button.ImageSource>
-                    </Button>
-                    --><!-- Add a ListView to display the list of alarms --><!--
-                    <ListView ItemsSource="{Binding Alarms}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                --><!-- Define the alarm item layout --><!--
-                                <TextCell Text="{Binding Label}" Detail="{Binding Time}" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>-->
-
-                    <!--<Button Text="Add Alarm"
-                            BackgroundColor="LightSteelBlue"
-                            TextColor="Black"
-                            FontAttributes="Bold"
-                            CornerRadius="22"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Padding="50,0"
-                            Clicked="OnButtonClicked"/>-->
                 </VerticalStackLayout>
 
             </Grid>

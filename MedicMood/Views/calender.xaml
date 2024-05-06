@@ -10,7 +10,7 @@
         <cal:Calendar.EventTemplate>
             <DataTemplate>
                 <VerticalStackLayout>
-                    <Label Text="{Binding Name}" FontSize="25" FontAttributes="Bold"/>
+                    <Label Text="{Binding Name}" FontSize="30" FontAttributes="Bold"/>
                     <Label Text="{Binding Description}"/>
                 </VerticalStackLayout>
             </DataTemplate>

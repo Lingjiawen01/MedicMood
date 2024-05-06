@@ -4,9 +4,9 @@
              x:Class="MedicMood.Views.ReminderPage"
              Title="ReminderPage">
 
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+    <!--<StackLayout VerticalOptions="Center" HorizontalOptions="Center">
         <Label Text="Time to wake up!" FontSize="24" HorizontalOptions="Center" />
         <Button Text="Dismiss" Clicked="DismissButton_Clicked" />
-    </StackLayout>
+    </StackLayout>-->
 
 </ContentPage>

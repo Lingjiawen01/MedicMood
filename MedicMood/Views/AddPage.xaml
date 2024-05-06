@@ -4,45 +4,29 @@
              xmlns:views="clr-namespace:MedicMood.Views"
              x:Class="MedicMood.Views.AddPage">
 
+    <StackLayout Margin="20,35,20,20">
+        <Label Text="Time:" />
+        <TimePicker x:Name="alarmTimePicker" Time="{Binding Time}" Format="T" />
+        <Label Text="Date:" />
+        <DatePicker x:Name="alarmDatePicker" Date="{Binding Date}" Format="T" />
 
-    <StackLayout>
-        <StackLayout Padding="20">
-            <Label Text="Set Alarm" FontSize="24" HorizontalOptions="Center" />
 
-            <DatePicker x:Name="alarmDatePicker" />
-
-            <TimePicker x:Name="alarmTimePicker" />
-
-            <Button Text="Set Alarm" Clicked="SetAlarmButton_Clicked" />
-            <Button Text="Cancel Alarm" Clicked="CancelAlarmButton_Clicked" />
-
-            <Label Text="Repeat" />
-            <Button Text="Repeat" Clicked="RepeatButton_Clicked" />
-            <StackLayout x:Name="repeatOptions" IsVisible="False">
-                <!-- 在用户点击 Repeat 按钮后显示的重复日期选项 -->
-                <Button Text="Monday" Clicked="ButtonMonday_Clicked" />
-                <Button Text="Tuesday" Clicked="ButtonTuesday_Clicked" />
-                <Button Text="Wednesday" Clicked="ButtonWednesday_Clicked" />
-                <Button Text="Thursday" Clicked="ButtonThursday_Clicked" />
-                <Button Text="Friday" Clicked="ButtonFriday_Clicked" />
-                <Button Text="Saturday" Clicked="ButtonSaturday_Clicked" />
-                <Button Text="Sunday" Clicked="ButtonSunday_Clicked" />
-
-            </StackLayout>
-
-            <!-- Sound selection -->
-            <Label Text="Select Sound:" />
-            <Picker x:Name="soundPicker">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Sound 1</x:String>
-                        <x:String>Sound 2</x:String>
-                        <!-- Add more sound options here -->
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-
+        <StackLayout Orientation="Horizontal">
+            <Label Text="On:" />
+            <Switch x:Name="workSwitch" HorizontalOptions="StartAndExpand" IsToggled="{Binding Work}" />
         </StackLayout>
 
+        <Label Text="Your Medicine:" />
+        <Editor x:Name="noteEditor" Placeholder="Enter" Text="{Binding Note}" MaxLength="300" HeightRequest="100" />
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Text="Save" Clicked="SetAlarmButton_Clicked" />
+            <Button Grid.Column="1" Text="Delete" Clicked="DeleteAlarmButton_Clicked" />
+        </Grid>
     </StackLayout>
 </ContentPage>

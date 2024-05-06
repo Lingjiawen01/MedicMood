@@ -1,70 +1,54 @@
-﻿using MedicMood.DataModel;
+﻿using System;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
+using System.Collections.Generic;
 
-namespace MedicMood.Views;
-
-public partial class Clockpage : ContentPage
+namespace MedicMood.Views
 {
-    public List<Alarm> Alarms { get; set; }
-    private int nextAlarmNumber = 1; // 用于跟踪下一个闹钟的编号
-    public Clockpage()
+    public partial class Clockpage : ContentPage
     {
-        InitializeComponent();
-        LoadAlarms();
-        StartTimerToUpdateTime();
-    }
+        private Database database;
+        private Alarm selectedAlarm;
 
-    private void LoadAlarms()
-    {
-        // Load no sample alarms (replace with actual data retrieval logic)
-        Alarms = new List<Alarm>();
+        public Clockpage(Database db)
         {
-            new Alarm { Label = "Alarm 1", Time = DateTime.Now.AddHours(1), IsActive = true };
-            new Alarm { Label = "Alarm 2", Time = DateTime.Now.AddHours(2), IsActive = true };
-        };
+            InitializeComponent();
+            database = db;
+            LoadAlarms();
+        }
 
-        // Update ListView with alarms
-        alarmListView.ItemsSource = Alarms;
-    }
-
-    [Obsolete]
-    private void StartTimerToUpdateTime()
-    {
-        Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+        private void LoadAlarms()
         {
-            // 更新手机时间
-            Device.BeginInvokeOnMainThread(() =>
+            if (database != null)
             {
-                // 设置 Label 的文本为当前手机时间
-                currentTimeLabel.Text = DateTime.Now.ToString("HH:mm:ss");
-            });
+                var alarms = database.GetAlarms();
+                alarmListView.ItemsSource = alarms;
+            }
+            else
+            {
+                // 清空现有的闹钟列表
+                alarmListView.ItemsSource = null;
 
-            // 返回 true 以继续循环
-            return true;
-        });
-    }
+                // 在页面中显示一个消息或提示用户添加闹钟的按钮
+                // 这里仅显示一个提示消息，您可以根据需要进行修改
+                DisplayAlert("Error", "Database is not initialized.", "OK");
+            }
+        }
 
-    private async void OnButtonClicked(object sender, EventArgs e)
-    {
-        // Navigate to the AddPage when the button is clicked, add alarm button
-        await Navigation.PushAsync(new AddPage (Alarms, nextAlarmNumber));
-    }
-    private void DeleteAlarm_Clicked(object sender, EventArgs e)
-    {
-        // Delete selected alarm from the list
-        if (alarmListView.SelectedItem != null)
+        protected override void OnAppearing()
         {
-            Alarms.Remove((Alarm)alarmListView.SelectedItem);
-            alarmListView.SelectedItem = null; // Clear selection
-            alarmListView.ItemsSource = null; // Refresh ListView
-            alarmListView.ItemsSource = Alarms;
+            base.OnAppearing();
+            LoadAlarms(); // 当页面显示时重新加载闹钟列表
+        }
+
+        private async void OnButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddPage(database));
+        }
+
+        private void OnAlarmItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            selectedAlarm = e.SelectedItem as Alarm;
         }
     }
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        // Refresh ListView when page appears
-        alarmListView.ItemsSource = null;
-        alarmListView.ItemsSource = Alarms;
-    }
-
 }
