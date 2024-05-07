@@ -1,7 +1,5 @@
-﻿using System;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Xaml;
-using System.Collections.Generic;
+﻿using Microsoft.Maui.Controls;
+using System;
 
 namespace MedicMood.Views
 {
@@ -9,11 +7,18 @@ namespace MedicMood.Views
     {
         private Database database;
         private Alarm selectedAlarm;
+        private List<Alarm> alarms;
 
-        public Clockpage(Database db)
+        public Clockpage()
         {
             InitializeComponent();
-            database = db;
+            InitializeDatabase();
+            StartTimerToUpdateTime();
+        }
+
+        private async void InitializeDatabase()
+        {
+            database = await Database.CreateInstanceAsync();
             LoadAlarms();
         }
 
@@ -21,16 +26,11 @@ namespace MedicMood.Views
         {
             if (database != null)
             {
-                var alarms = database.GetAlarms();
-                alarmListView.ItemsSource = alarms;
+                alarms = database.GetAlarms(); // 将获取到的闹钟赋值给 alarms
+                alarmListView.ItemsSource = database.GetAlarms();
             }
             else
             {
-                // 清空现有的闹钟列表
-                alarmListView.ItemsSource = null;
-
-                // 在页面中显示一个消息或提示用户添加闹钟的按钮
-                // 这里仅显示一个提示消息，您可以根据需要进行修改
                 DisplayAlert("Error", "Database is not initialized.", "OK");
             }
         }
@@ -38,7 +38,7 @@ namespace MedicMood.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            LoadAlarms(); // 当页面显示时重新加载闹钟列表
+            LoadAlarms();
         }
 
         private async void OnButtonClicked(object sender, EventArgs e)
@@ -50,5 +50,55 @@ namespace MedicMood.Views
         {
             selectedAlarm = e.SelectedItem as Alarm;
         }
+
+        private async void DeletButton(object sender, EventArgs e)
+        {
+            if (selectedAlarm != null)
+            {
+                bool result = await DisplayAlert("Confirm", "Are you sure you want to delete this alarm?", "Yes", "No");
+                if (result)
+                {
+                    database.DeleteAlarm(selectedAlarm.Id);
+                    LoadAlarms(); // 刷新列表
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "No alarm selected.", "OK");
+            }
+        }
+
+        [Obsolete]
+        private void StartTimerToUpdateTime()
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                var currentTime = DateTime.Now;
+                foreach (var alarm in alarms)
+                {
+                    if (!alarm.IsRinging && alarm.Time.Hour == currentTime.Hour && alarm.Time.Minute == currentTime.Minute)
+                    {
+                        alarm.IsRinging = true;
+                        ShowReminderPage(alarm);
+                    }
+                }
+
+                // 更新手机时间
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    // 设置 Label 的文本为当前手机时间
+                    currentTimeLabel.Text = currentTime.ToString("HH:mm:ss");
+                });
+
+                // 返回 true 以继续循环
+                return true;
+            });
+        }
+
+        private async void ShowReminderPage(Alarm alarm)
+        {
+            await Navigation.PushAsync(new ReminderPage(alarm));
+        }
+
     }
 }

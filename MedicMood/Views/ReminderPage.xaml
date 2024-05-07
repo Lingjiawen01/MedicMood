@@ -2,11 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MedicMood.Views.ReminderPage"
-             Title="ReminderPage">
+             Title="ReminderPage"
+             BackgroundColor="#223660">
 
-    <!--<StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Time to wake up!" FontSize="24" HorizontalOptions="Center" />
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Time to Take Your MEDIC!" FontSize="25" HorizontalOptions="Center" />
+        <Label x:Name="medicineNoteLabel" 
+               Text=""
+               FontSize="15" 
+               HorizontalOptions="Center"/>
         <Button Text="Dismiss" Clicked="DismissButton_Clicked" />
-    </StackLayout>-->
+    </StackLayout>
 
 </ContentPage>

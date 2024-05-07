@@ -20,24 +20,10 @@
                    FontSize="30"
                    FontFamily="Montserrat"/>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                <Button BackgroundColor="LightSteelBlue"
-                    CornerRadius="45"
-                    HeightRequest="32"
-                    WidthRequest="32">
-
-                    <Button.ImageSource>
-                        <FontImageSource
-                        FontFamily="FAS"
-                        Glyph="{x:Static helpers:FontAwesomeHelper.Gear}"
-                        Size="18" />
-                    </Button.ImageSource>
-                </Button>
-            </StackLayout>
-
             <Grid ColumnDefinitions="*,150,*"
                   RowDefinitions="Auto,*,Auto"
                   BackgroundColor="#2CB5E0">
+                
                 <VerticalStackLayout Grid.Row="1"
                                      Grid.Column="1"
                                      HorizontalOptions="Center"
@@ -45,14 +31,15 @@
                                      Spacing="20">
 
                     <ListView x:Name="alarmListView"
+                              VerticalOptions="FillAndExpand"
+                              HorizontalOptions="FillAndExpand"
                               ItemSelected="OnAlarmItemSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextCell Text="{Binding Label}" Detail="{Binding Time}" />
+                                <TextCell Text="{Binding Note}" Detail="{Binding Time}" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-
 
                     <Button Clicked="OnButtonClicked"
                             BackgroundColor="#00A4D7">
@@ -63,6 +50,11 @@
                                 Size="30" />
                         </Button.ImageSource>
                     </Button>
+
+                    <ImageButton Source="recyclebin.png"
+                                 MaximumHeightRequest="40"
+                                 Clicked="DeletButton"
+                                 BackgroundColor="#00A4D7"/>
 
                 </VerticalStackLayout>
 

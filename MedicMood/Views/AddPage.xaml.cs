@@ -23,7 +23,8 @@ namespace MedicMood.Views
             {
                 Label = "Your Label",
                 Time = alarmDateTime,
-                IsActive = workSwitch.IsToggled
+                IsActive = workSwitch.IsToggled,
+                MedicineNote = noteEditor.Text // 获取用户输入的 Medicine Note
             };
 
             database.AddAlarm(alarm);

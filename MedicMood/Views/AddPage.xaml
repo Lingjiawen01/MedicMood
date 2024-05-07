@@ -6,18 +6,18 @@
 
     <StackLayout Margin="20,35,20,20">
         <Label Text="Time:" />
-        <TimePicker x:Name="alarmTimePicker" Time="{Binding Time}" Format="T" />
+        <TimePicker x:Name="alarmTimePicker" Time="{Binding Time}"/>
         <Label Text="Date:" />
-        <DatePicker x:Name="alarmDatePicker" Date="{Binding Date}" Format="T" />
+        <DatePicker x:Name="alarmDatePicker" Date="{Binding Date}"/>
 
 
-        <StackLayout Orientation="Horizontal">
+        <StackLayout Orientation="Vertical">
             <Label Text="On:" />
             <Switch x:Name="workSwitch" HorizontalOptions="StartAndExpand" IsToggled="{Binding Work}" />
         </StackLayout>
 
-        <Label Text="Your Medicine:" />
-        <Editor x:Name="noteEditor" Placeholder="Enter" Text="{Binding Note}" MaxLength="300" HeightRequest="100" />
+       <Label Text="Medicine Note:" />
+        <Editor x:Name="noteEditor" Placeholder="Enter" MaxLength="300" HeightRequest="100" />
 
         <Grid Margin="10">
             <Grid.ColumnDefinitions>

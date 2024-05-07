@@ -1,17 +1,20 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
-using Microsoft.Data.Sqlite;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace MedicMood.Views
 {
     public class Database
     {
-        SqliteConnection database;
+        private static SqliteConnection _database;
+        private static readonly string DbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MedicMood.db3");
 
-        public Database(string dbPath)
+        public Database()
         {
-            database = new SqliteConnection($"Data Source={dbPath}");
-            database.Open();
+            _database = new SqliteConnection($"Data Source={DbPath}");
+            _database.Open();
 
             // 创建闹钟表
             string createTableCmd = @"CREATE TABLE IF NOT EXISTS Alarm (
@@ -22,12 +25,19 @@ namespace MedicMood.Views
             ExecuteNonQuery(createTableCmd);
         }
 
+        public static async Task<Database> CreateInstanceAsync()
+        {
+            var database = new Database();
+            await Task.CompletedTask; // Simulating async operation
+            return database;
+        }
+
         public List<Alarm> GetAlarms()
         {
             List<Alarm> alarms = new List<Alarm>();
 
             string query = "SELECT * FROM Alarm";
-            using (var command = new SqliteCommand(query, database))
+            using (var command = new SqliteCommand(query, _database))
             {
                 using (var reader = command.ExecuteReader())
                 {
@@ -68,7 +78,7 @@ namespace MedicMood.Views
 
         private void ExecuteNonQuery(string commandText)
         {
-            using (var command = new SqliteCommand(commandText, database))
+            using (var command = new SqliteCommand(commandText, _database))
             {
                 command.ExecuteNonQuery();
             }
@@ -82,5 +92,8 @@ namespace MedicMood.Views
         public string Label { get; set; }
         public DateTime Time { get; set; }
         public bool IsActive { get; set; }
+        public bool IsRinging { get; set; }
+        public string MedicineNote { get; set; }
+
     }
 }
