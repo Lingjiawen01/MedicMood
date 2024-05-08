@@ -7,8 +7,12 @@
     <StackLayout Margin="20,35,20,20">
         <Label Text="Time:" />
         <TimePicker x:Name="alarmTimePicker" Time="{Binding Time}"/>
-        <Label Text="Date:" />
-        <DatePicker x:Name="alarmDatePicker" Date="{Binding Date}"/>
+        <Label Text="Start Date:" />
+        <DatePicker x:Name="startDatePicker" Date="{Binding StartDate}" />
+        <Label Text="End Date:" />
+        <DatePicker x:Name="endDatePicker" Date="{Binding EndDate}" />
+
+
 
 
         <StackLayout Orientation="Vertical">

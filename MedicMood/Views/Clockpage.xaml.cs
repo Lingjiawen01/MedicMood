@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Controls;
 using System;
+using System.Collections.Generic;
 
 namespace MedicMood.Views
 {
@@ -27,7 +28,7 @@ namespace MedicMood.Views
             if (database != null)
             {
                 alarms = database.GetAlarms(); // 将获取到的闹钟赋值给 alarms
-                alarmListView.ItemsSource = database.GetAlarms();
+                alarmListView.ItemsSource = alarms;
             }
             else
             {
@@ -76,7 +77,7 @@ namespace MedicMood.Views
                 var currentTime = DateTime.Now;
                 foreach (var alarm in alarms)
                 {
-                    if (!alarm.IsRinging && alarm.Time.Hour == currentTime.Hour && alarm.Time.Minute == currentTime.Minute)
+                    if (!alarm.IsRinging && alarm.StartTime.Hour == currentTime.Hour && alarm.StartTime.Minute == currentTime.Minute)
                     {
                         alarm.IsRinging = true;
                         ShowReminderPage(alarm);
@@ -99,6 +100,5 @@ namespace MedicMood.Views
         {
             await Navigation.PushAsync(new ReminderPage(alarm));
         }
-
     }
 }

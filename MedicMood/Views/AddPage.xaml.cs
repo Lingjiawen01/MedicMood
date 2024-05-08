@@ -9,22 +9,46 @@ namespace MedicMood.Views
     {
         private Database database;
         private Alarm selectedAlarm;
+        private DateTime startDate;
+        private DateTime endDate;
+
+        public DateTime StartDate
+        {
+            get => startDate;
+            set
+            {
+                startDate = value;
+                OnPropertyChanged(nameof(StartDate));
+            }
+        }
+        public DateTime EndDate
+        {
+            get => endDate;
+            set
+            {
+                endDate = value;
+                OnPropertyChanged(nameof(EndDate));
+            }
+        }
+
 
         public AddPage(Database db)
         {
             InitializeComponent();
             database = db;
+            StartDate = DateTime.Today; // 默认起始日期为今天
+            EndDate = DateTime.Today; // 默认结束日期为今天
         }
 
         private async void SetAlarmButton_Clicked(object sender, EventArgs e)
         {
-            DateTime alarmDateTime = alarmDatePicker.Date.Add(alarmTimePicker.Time);
             Alarm alarm = new Alarm
             {
                 Label = "Your Label",
-                Time = alarmDateTime,
+                StartTime = StartDate,
+                EndTime = EndDate,
                 IsActive = workSwitch.IsToggled,
-                MedicineNote = noteEditor.Text // 获取用户输入的 Medicine Note
+                MedicineNote = noteEditor.Text
             };
 
             database.AddAlarm(alarm);
@@ -34,6 +58,7 @@ namespace MedicMood.Views
 
             await Navigation.PopAsync();
         }
+
 
         private async void DeleteAlarmButton_Clicked(object sender, EventArgs e)
         {
