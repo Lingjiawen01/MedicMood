@@ -6,61 +6,55 @@
              xmlns:helpers="clr-namespace:MedicMood.Helpers" 
              Title="Clock"
              Padding="20"
-             BackgroundColor="#B6D0E2">
+             BackgroundColor="#2CB5E0">
 
-    <ScrollView>
+    <Grid BackgroundColor="#7FD3ED" Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        <StackLayout Orientation="Vertical">
-
+        <!-- Time Display -->
+        <StackLayout Grid.Row="0" HorizontalOptions="CenterAndExpand" Spacing="10">
             <Label x:Name="currentTimeLabel" 
-                   Text="00:00:00" 
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   TextColor="DarkGrey"
-                   FontSize="30"
-                   FontFamily="Montserrat"/>
+                  Text="00:00:00" 
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"
+                  TextColor="Black"
+                  FontSize="50"
+                  FontFamily="Montserrat"/>
+        </StackLayout>
 
-            <Grid ColumnDefinitions="*,150,*"
-                  RowDefinitions="Auto,*,Auto"
-                  BackgroundColor="#2CB5E0">
-                
-                <VerticalStackLayout Grid.Row="1"
-                                     Grid.Column="1"
-                                     HorizontalOptions="Center"
-                                     VerticalOptions="Center"
-                                     Spacing="20">
+        <StackLayout Grid.Row="1" Spacing="20">
+            <ListView x:Name="alarmListView"
+                      VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      ItemSelected="OnAlarmItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Note}" Detail="{Binding Time}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-                    <ListView x:Name="alarmListView"
-                              VerticalOptions="FillAndExpand"
-                              HorizontalOptions="FillAndExpand"
-                              ItemSelected="OnAlarmItemSelected">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextCell Text="{Binding Note}" Detail="{Binding Time}" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+            <Button Clicked="OnButtonClicked"
+                           BackgroundColor="#00A4D7">
+                <Button.ImageSource>
+                    <FontImageSource
+                               FontFamily="FAS"
+                               Glyph="{x:Static helpers:FontAwesomeHelper.Plus}"
+                               Size="30" />
+                </Button.ImageSource>
+            </Button>
 
-                    <Button Clicked="OnButtonClicked"
-                            BackgroundColor="#00A4D7">
-                        <Button.ImageSource>
-                            <FontImageSource
-                                FontFamily="FAS"
-                                Glyph="{x:Static helpers:FontAwesomeHelper.Plus}"
-                                Size="30" />
-                        </Button.ImageSource>
-                    </Button>
-
-                    <ImageButton Source="recyclebin.png"
-                                 MaximumHeightRequest="40"
-                                 Clicked="DeletButton"
-                                 BackgroundColor="#00A4D7"/>
-
-                </VerticalStackLayout>
-
-            </Grid>
+            <ImageButton Source="recyclebin.png"
+                                MaximumHeightRequest="40"
+                                Clicked="DeletButton"
+                                BackgroundColor="#00A4D7"/>
 
         </StackLayout>
 
-    </ScrollView>
+    </Grid>
+
 </ContentPage>

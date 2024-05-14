@@ -11,21 +11,27 @@ namespace MedicMood.Views
         {
             InitializeComponent();
             this.alarm = alarm;
-            ShowMedicineNote();
-        }
-
-        private void ShowMedicineNote()
-        {
-            if (alarm != null)
-            {
-                medicineNoteLabel.Text = alarm.MedicineNote;
-            }
         }
 
         private async void DismissButton_Clicked(object sender, EventArgs e)
         {
             alarm.IsRinging = false;
-            await Navigation.PopAsync();
+
+            // 检查当前页面是否是栈顶页面
+            if (Navigation.NavigationStack.Count > 0 && Navigation.NavigationStack.Last() == this)
+            {
+                await Navigation.PopAsync();
+            }
+        }
+
+        private async void SnoozeButton_Clicked(object sender, EventArgs e)
+        {
+            // 停止闹钟一段时间
+            alarm.IsRinging = false;
+            TimeSpan snoozeDuration = TimeSpan.FromMinutes(5);
+            await Task.Delay(snoozeDuration);
+            // 再次启动闹钟
+            alarm.IsRinging = true;
         }
     }
 }

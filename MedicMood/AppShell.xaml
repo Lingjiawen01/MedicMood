@@ -6,7 +6,9 @@
     xmlns:local="clr-namespace:MedicMood"
     xmlns:views="clr-namespace:MedicMood.Views"
     xmlns:model="clr-namesapce:MedicMood.DataModel"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="#97DAEF">
+    
 
     <TabBar>
         <Tab Title="Clock"

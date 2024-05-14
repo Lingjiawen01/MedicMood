@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cal="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
              x:Class="MedicMood.Views.calender"
-             Title="calender">
+             Title="Mood Dashboard">
 
     <cal:Calendar Events="{Binding Events}" EventsScrollViewVisible="True" SelectedDayBackgroundColor="#00C11F"
                   CalendarLayout="Month">
@@ -12,6 +12,7 @@
                 <VerticalStackLayout>
                     <Label Text="{Binding Name}" FontSize="30" FontAttributes="Bold"/>
                     <Label Text="{Binding Description}"/>
+                    <Label Text="{Binding MedicineNote}" FontSize="20"/>
                 </VerticalStackLayout>
             </DataTemplate>
         </cal:Calendar.EventTemplate>

@@ -20,8 +20,7 @@ namespace MedicMood.Views
             string createTableCmd = @"CREATE TABLE IF NOT EXISTS Alarm (
                                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
                                         Label TEXT,
-                                        StartTime DATETIME, // 修改这里
-                                        EndTime DATETIME, // 修改这里
+                                        Time DATETIME,
                                         IsActive INTEGER)";
             ExecuteNonQuery(createTableCmd);
         }
@@ -48,30 +47,25 @@ namespace MedicMood.Views
                         {
                             Id = reader.GetInt32(0),
                             Label = reader.GetString(1),
-                            StartTime = reader.GetDateTime(2), // 修改这里
-                            EndTime = reader.GetDateTime(3), // 修改这里
-                            IsActive = Convert.ToBoolean(reader.GetInt32(4)) // 修改这里
+                            Time = reader.GetDateTime(2),
+                            IsActive = Convert.ToBoolean(reader.GetInt32(3))
                         };
                         alarms.Add(alarm);
                     }
                 }
             }
-
             return alarms;
         }
-
         public void AddAlarm(Alarm alarm)
         {
-            string insertCmd = $"INSERT INTO Alarm (Label, StartTime, EndTime, IsActive) VALUES ('{alarm.Label}', '{alarm.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{alarm.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', {(alarm.IsActive ? 1 : 0)})";
+            string insertCmd = $"INSERT INTO Alarm (Label, Time, IsActive) VALUES ('{alarm.Label}', '{alarm.Time.ToString("yyyy-MM-dd HH:mm:ss")}', {(alarm.IsActive ? 1 : 0)})";
             ExecuteNonQuery(insertCmd);
         }
-
         public void UpdateAlarm(Alarm alarm)
         {
-            string updateCmd = $"UPDATE Alarm SET Label = '{alarm.Label}', StartTime = '{alarm.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', EndTime = '{alarm.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', IsActive = {(alarm.IsActive ? 1 : 0)} WHERE Id = {alarm.Id}";
+            string updateCmd = $"UPDATE Alarm SET Label = '{alarm.Label}', Time = '{alarm.Time.ToString("yyyy-MM-dd HH:mm:ss")}', IsActive = {(alarm.IsActive ? 1 : 0)} WHERE Id = {alarm.Id}";
             ExecuteNonQuery(updateCmd);
         }
-
         public void DeleteAlarm(int id)
         {
             string deleteCmd = $"DELETE FROM Alarm WHERE Id = {id}";
@@ -86,16 +80,17 @@ namespace MedicMood.Views
             }
         }
     }
-
     // 闹钟实体类
     public class Alarm
     {
         public int Id { get; set; }
         public string Label { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        //public String Note { get; set; }
+        public DateTime Time { get; set; }
         public bool IsActive { get; set; }
         public bool IsRinging { get; set; }
-        public string MedicineNote { get; set; }
+        public List<DayOfWeek> RepeatDays { get; set; } // 新增的重复模式属性
+
     }
+
 }

@@ -6,12 +6,12 @@
              BackgroundColor="#223660">
 
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Time to Take Your MEDIC!" FontSize="25" HorizontalOptions="Center" />
-        <Label x:Name="medicineNoteLabel" 
+        <Label x:Name="Note" 
                Text=" "
                FontSize="15" 
                HorizontalOptions="Center"/>
         <Button Text="Dismiss" Clicked="DismissButton_Clicked" />
+        <Button Text="Snooze" Clicked="SnoozeButton_Clicked"/>
     </StackLayout>
 
 </ContentPage>

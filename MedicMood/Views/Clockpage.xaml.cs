@@ -1,6 +1,5 @@
 ﻿using Microsoft.Maui.Controls;
 using System;
-using System.Collections.Generic;
 
 namespace MedicMood.Views
 {
@@ -28,7 +27,7 @@ namespace MedicMood.Views
             if (database != null)
             {
                 alarms = database.GetAlarms(); // 将获取到的闹钟赋值给 alarms
-                alarmListView.ItemsSource = alarms;
+                alarmListView.ItemsSource = database.GetAlarms();
             }
             else
             {
@@ -46,7 +45,6 @@ namespace MedicMood.Views
         {
             await Navigation.PushAsync(new AddPage(database));
         }
-
         private void OnAlarmItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             selectedAlarm = e.SelectedItem as Alarm;
@@ -77,20 +75,18 @@ namespace MedicMood.Views
                 var currentTime = DateTime.Now;
                 foreach (var alarm in alarms)
                 {
-                    if (!alarm.IsRinging && alarm.StartTime.Hour == currentTime.Hour && alarm.StartTime.Minute == currentTime.Minute)
+                    if (!alarm.IsRinging && alarm.Time.Hour == currentTime.Hour && alarm.Time.Minute == currentTime.Minute)
                     {
                         alarm.IsRinging = true;
                         ShowReminderPage(alarm);
                     }
                 }
-
                 // 更新手机时间
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     // 设置 Label 的文本为当前手机时间
                     currentTimeLabel.Text = currentTime.ToString("HH:mm:ss");
                 });
-
                 // 返回 true 以继续循环
                 return true;
             });
@@ -100,5 +96,6 @@ namespace MedicMood.Views
         {
             await Navigation.PushAsync(new ReminderPage(alarm));
         }
+
     }
 }

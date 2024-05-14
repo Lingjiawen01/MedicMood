@@ -3,34 +3,76 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MedicMood.Views"
              x:Class="MedicMood.Views.AddPage">
+    <ScrollView>
 
-    <StackLayout Margin="20,35,20,20">
-        <Label Text="Time:" />
-        <TimePicker x:Name="alarmTimePicker" Time="{Binding Time}"/>
-        <Label Text="Start Date:" />
-        <DatePicker x:Name="startDatePicker" Date="{Binding StartDate}" />
-        <Label Text="End Date:" />
-        <DatePicker x:Name="endDatePicker" Date="{Binding EndDate}" />
+        <StackLayout Margin="20,35,20,20">
+            <Label Text="Time:" />
+            <TimePicker x:Name="alarmTimePicker" Time="{Binding Time}"/>
+            <Label Text="Date:" />
+            <DatePicker x:Name="alarmDatePicker" Date="{Binding Date}"/>
 
+            <StackLayout Orientation="Vertical">
+                <Label Text="On:" />
+                <Switch x:Name="workSwitch" HorizontalOptions="StartAndExpand" IsToggled="{Binding Work}" />
+            </StackLayout>
 
+            <StackLayout Orientation="Vertical">
+                <Label Text="Repeat:" />
 
+                <!-- 星期一 -->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="MondayCheckBox" CheckedChanged="OnRepeatDayCheckedChanged" />
+                    <Label Text="Monday" VerticalOptions="Center" />
+                </StackLayout>
 
-        <StackLayout Orientation="Vertical">
-            <Label Text="On:" />
-            <Switch x:Name="workSwitch" HorizontalOptions="StartAndExpand" IsToggled="{Binding Work}" />
+                <!-- 星期二 -->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="TuesdayCheckBox" CheckedChanged="OnRepeatDayCheckedChanged" />
+                    <Label Text="Tuesday" VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- 星期三 -->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="WednesdayCheckBox" CheckedChanged="OnRepeatDayCheckedChanged" />
+                    <Label Text="Wednesday" VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- 星期四 -->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="ThursdayCheckBox" CheckedChanged="OnRepeatDayCheckedChanged" />
+                    <Label Text="Thursday" VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- 星期五 -->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="FridayCheckBox" CheckedChanged="OnRepeatDayCheckedChanged" />
+                    <Label Text="Friday" VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- 星期六 -->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="SaturdayCheckBox" CheckedChanged="OnRepeatDayCheckedChanged" />
+                    <Label Text="Saturday" VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- 星期日 -->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="SundayCheckBox" CheckedChanged="OnRepeatDayCheckedChanged" />
+                    <Label Text="Sunday" VerticalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
+
+            <Label Text="Medicine Note:" />
+            <Entry x:Name="Note" Placeholder="Enter"/>
+
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Text="Save" Clicked="SetAlarmButton_Clicked"/>
+            </Grid>
         </StackLayout>
-
-       <Label Text="Medicine Note:" />
-        <Editor x:Name="noteEditor" Placeholder="Enter" MaxLength="300" HeightRequest="100" />
-
-        <Grid Margin="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Button Text="Save" Clicked="SetAlarmButton_Clicked" />
-            <Button Grid.Column="1" Text="Delete" Clicked="DeleteAlarmButton_Clicked" />
-        </Grid>
-    </StackLayout>
+    </ScrollView>
+ 
 </ContentPage>

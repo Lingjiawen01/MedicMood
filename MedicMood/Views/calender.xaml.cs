@@ -1,4 +1,4 @@
-using Plugin.Maui.Calendar.Models;
+﻿using Plugin.Maui.Calendar.Models;
 
 namespace MedicMood.Views
 {
