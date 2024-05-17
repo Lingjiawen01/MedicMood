@@ -18,11 +18,32 @@ namespace MedicMood.Views
 
             // 创建闹钟表
             string createTableCmd = @"CREATE TABLE IF NOT EXISTS Alarm (
-                                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                        Label TEXT,
-                                        Time DATETIME,
-                                        IsActive INTEGER)";
+                                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                    Label TEXT,
+                                    Time DATETIME,
+                                    IsActive INTEGER,
+                                    Note TEXT)";  // 添加 Note 字段
+
             ExecuteNonQuery(createTableCmd);
+
+            // Ensure the Note column exists
+            AddColumnIfNotExists("Note", "TEXT");
+        }
+
+        private void AddColumnIfNotExists(string columnName, string columnType)
+        {
+            string addColumnCmd = $"ALTER TABLE Alarm ADD COLUMN {columnName} {columnType}";
+            using (var command = new SqliteCommand(addColumnCmd, _database))
+            {
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (SqliteException ex) when (ex.SqliteErrorCode == 1)
+                {
+                    // Column already exists
+                }
+            }
         }
 
         public static async Task<Database> CreateInstanceAsync()
@@ -48,7 +69,8 @@ namespace MedicMood.Views
                             Id = reader.GetInt32(0),
                             Label = reader.GetString(1),
                             Time = reader.GetDateTime(2),
-                            IsActive = Convert.ToBoolean(reader.GetInt32(3))
+                            IsActive = Convert.ToBoolean(reader.GetInt32(3)),
+                            Note = reader.IsDBNull(4) ? null : reader.GetString(4)  // Handle NULL values
                         };
                         alarms.Add(alarm);
                     }
@@ -56,16 +78,19 @@ namespace MedicMood.Views
             }
             return alarms;
         }
+
         public void AddAlarm(Alarm alarm)
         {
-            string insertCmd = $"INSERT INTO Alarm (Label, Time, IsActive) VALUES ('{alarm.Label}', '{alarm.Time.ToString("yyyy-MM-dd HH:mm:ss")}', {(alarm.IsActive ? 1 : 0)})";
+            string insertCmd = $"INSERT INTO Alarm (Label, Note, Time, IsActive) VALUES ('{alarm.Label}', '{alarm.Note}', '{alarm.Time.ToString("yyyy-MM-dd HH:mm:ss")}', {(alarm.IsActive ? 1 : 0)})";
             ExecuteNonQuery(insertCmd);
         }
+
         public void UpdateAlarm(Alarm alarm)
         {
-            string updateCmd = $"UPDATE Alarm SET Label = '{alarm.Label}', Time = '{alarm.Time.ToString("yyyy-MM-dd HH:mm:ss")}', IsActive = {(alarm.IsActive ? 1 : 0)} WHERE Id = {alarm.Id}";
+            string updateCmd = $"UPDATE Alarm SET Label = '{alarm.Label}', Time = '{alarm.Time.ToString("yyyy-MM-dd HH:mm:ss")}', IsActive = {(alarm.IsActive ? 1 : 0)}, Note = '{alarm.Note}' WHERE Id = {alarm.Id}";
             ExecuteNonQuery(updateCmd);
         }
+
         public void DeleteAlarm(int id)
         {
             string deleteCmd = $"DELETE FROM Alarm WHERE Id = {id}";
@@ -79,18 +104,26 @@ namespace MedicMood.Views
                 command.ExecuteNonQuery();
             }
         }
+
+
+
     }
-    // 闹钟实体类
+
     public class Alarm
     {
         public int Id { get; set; }
         public string Label { get; set; }
-        //public String Note { get; set; }
+        public string Note { get; set; }
         public DateTime Time { get; set; }
         public bool IsActive { get; set; }
         public bool IsRinging { get; set; }
-        public List<DayOfWeek> RepeatDays { get; set; } // 新增的重复模式属性
-
+        public List<DayOfWeek> RepeatDays { get; set; }
     }
 
+    //public class MoodNote
+    //{
+    //    public string Mood { get; set; }
+    //    public string NOTE { get; set; }
+    //    public DateTime Date { get; set; }
+    //}
 }

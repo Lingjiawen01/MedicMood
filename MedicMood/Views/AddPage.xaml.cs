@@ -22,7 +22,8 @@ namespace MedicMood.Views
                 Label = "Your Label",
                 Time = alarmDateTime,
                 IsActive = workSwitch.IsToggled,
-                RepeatDays = new List<DayOfWeek>() // Initialize the list
+                RepeatDays = new List<DayOfWeek>(), // Initialize the list
+                Note = medicineNameEntry.Text  // 保存药品名称
             };
 
             database.AddAlarm(alarm);

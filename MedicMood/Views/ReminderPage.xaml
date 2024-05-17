@@ -5,13 +5,15 @@
              Title="ReminderPage"
              BackgroundColor="#223660">
 
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label x:Name="Note" 
-               Text=" "
-               FontSize="15" 
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Margin="20" Spacing="10">
+        <Label x:Name="medicineNameLabel"
+               Text=""
+               TextColor="WhiteSmoke"
+               FontSize="40"
                HorizontalOptions="Center"/>
         <Button Text="Dismiss" Clicked="DismissButton_Clicked" />
         <Button Text="Snooze" Clicked="SnoozeButton_Clicked"/>
+        
     </StackLayout>
 
 </ContentPage>

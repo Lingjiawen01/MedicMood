@@ -63,7 +63,7 @@
             </StackLayout>
 
             <Label Text="Medicine Note:" />
-            <Entry x:Name="Note" Placeholder="Enter"/>
+            <Entry x:Name="medicineNameEntry" Placeholder="Enter medicine name" />
 
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>

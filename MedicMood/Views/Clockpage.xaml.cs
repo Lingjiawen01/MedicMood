@@ -92,6 +92,7 @@ namespace MedicMood.Views
             });
         }
 
+
         private async void ShowReminderPage(Alarm alarm)
         {
             await Navigation.PushAsync(new ReminderPage(alarm));

@@ -1,4 +1,4 @@
-﻿using MedicMood.Views;
+﻿using System;
 using Microsoft.Maui.Controls;
 
 namespace MedicMood.Views
@@ -11,27 +11,30 @@ namespace MedicMood.Views
         {
             InitializeComponent();
             this.alarm = alarm;
+            medicineNameLabel.Text = alarm.Note;  // 显示药品名称
         }
 
         private async void DismissButton_Clicked(object sender, EventArgs e)
         {
-            alarm.IsRinging = false;
+            // Update alarm status in the database
+            var database = await Database.CreateInstanceAsync();
+            database.UpdateAlarm(alarm);
 
-            // 检查当前页面是否是栈顶页面
-            if (Navigation.NavigationStack.Count > 0 && Navigation.NavigationStack.Last() == this)
-            {
-                await Navigation.PopAsync();
-            }
+            await Navigation.PushAsync(new Mood());
         }
 
         private async void SnoozeButton_Clicked(object sender, EventArgs e)
         {
-            // 停止闹钟一段时间
             alarm.IsRinging = false;
-            TimeSpan snoozeDuration = TimeSpan.FromMinutes(5);
-            await Task.Delay(snoozeDuration);
-            // 再次启动闹钟
-            alarm.IsRinging = true;
+
+            // 更新数据库中的闹钟状态
+            var database = await Database.CreateInstanceAsync();
+            database.UpdateAlarm(alarm);
+
+            await Task.Delay(TimeSpan.FromMinutes(5)); // 等待5分钟
+
+            alarm.IsRinging = true; // 重新响起闹钟
+            database.UpdateAlarm(alarm); // 更新数据库中的闹钟状态
         }
     }
 }

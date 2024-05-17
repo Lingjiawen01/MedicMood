@@ -12,11 +12,9 @@
                 <VerticalStackLayout>
                     <Label Text="{Binding Name}" FontSize="30" FontAttributes="Bold"/>
                     <Label Text="{Binding Description}"/>
-                    <Label Text="{Binding MedicineNote}" FontSize="20"/>
+                    <!-- Show mood note here -->
                 </VerticalStackLayout>
             </DataTemplate>
         </cal:Calendar.EventTemplate>
     </cal:Calendar>
-
-
 </ContentPage>
