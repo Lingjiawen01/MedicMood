@@ -19,7 +19,8 @@
 
         <Tab Title="Dashboard"
              Icon="dashboard.png">
-            <ShellContent ContentTemplate="{DataTemplate views:calender}"/>
+            <ShellContent ContentTemplate="{DataTemplate views:Dashboard}"
+                          Route="Dashboard"/>
         </Tab>
 
     </TabBar>

@@ -1,7 +1,6 @@
-﻿using Microsoft.Maui.Controls;
+﻿using System;
+using Microsoft.Maui.Controls;
 using Plugin.Maui.Calendar.Models;
-using System;
-using System.Collections.Generic;
 
 namespace MedicMood.Views
 {
@@ -17,18 +16,32 @@ namespace MedicMood.Views
             this.moodNote = moodNote;
             this.selectedEmoji = selectedEmoji;
             Events = new EventCollection();
-            LoadEvents();
             BindingContext = this;
         }
 
-        public calender(string selectedEmoji)
+
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
+            LoadEvents();
+        }
+
+        // Method to set the moodNote and selectedEmoji values
+        public void SetMood(string moodNote, string selectedEmoji)
+        {
+            this.moodNote = moodNote;
             this.selectedEmoji = selectedEmoji;
         }
 
         private void LoadEvents()
         {
+            // Clear existing events
+            Events.Clear();
+
+            // Get the current date
             var currentDate = DateTime.Now.Date;
+
+            // Create an event for today with stored moodNote and selectedEmoji values
             Events[currentDate] = new List<EventModel>
             {
                 new EventModel
@@ -38,6 +51,16 @@ namespace MedicMood.Views
                 }
             };
         }
+
+        // Define the CalendarUpdated event
+        public event EventHandler<EventArgs> CalendarUpdated;
+
+        // Call this method whenever the calendar is updated
+        private void OnCalendarUpdated()
+        {
+            CalendarUpdated?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 
     public class EventModel

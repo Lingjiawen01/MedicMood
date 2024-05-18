@@ -5,20 +5,20 @@ namespace MedicMood.Views
 {
     public partial class Mood : ContentPage
     {
-        public Mood()
+        private string medicineName;
+
+        public Mood(string medicineName)
         {
             InitializeComponent();
+            this.medicineName = medicineName;
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
             var selectedEmoji = moodPicker.SelectedItem.ToString();
 
-            // Create an instance of Calender with both moodNote and selectedEmoji parameters
-            await Navigation.PushAsync(new calender("Your mood note here", selectedEmoji));
-
-            // Navigate back to Clock page
-            await Navigation.PopAsync();
+            // Navigate to CalendarPage and pass both selected emoji and medicine name
+            await Navigation.PushAsync(new calender(medicineName, selectedEmoji));
         }
     }
 }

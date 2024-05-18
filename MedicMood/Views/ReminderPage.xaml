@@ -11,7 +11,7 @@
                TextColor="WhiteSmoke"
                FontSize="40"
                HorizontalOptions="Center"/>
-        <Button Text="Dismiss" Clicked="DismissButton_Clicked" />
+        <Button Text="Done,Next" Clicked="DismissButton_Clicked" />
         <Button Text="Snooze" Clicked="SnoozeButton_Clicked"/>
         
     </StackLayout>

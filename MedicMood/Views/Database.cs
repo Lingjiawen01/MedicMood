@@ -120,10 +120,4 @@ namespace MedicMood.Views
         public List<DayOfWeek> RepeatDays { get; set; }
     }
 
-    //public class MoodNote
-    //{
-    //    public string Mood { get; set; }
-    //    public string NOTE { get; set; }
-    //    public DateTime Date { get; set; }
-    //}
 }
