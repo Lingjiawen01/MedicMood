@@ -98,10 +98,10 @@ namespace MedicMood.Views
             await Navigation.PushAsync(new ReminderPage(alarm));
         }
 
-        //public void NavigateToCalender(string medicineName, string selectedEmoji)
-        //{
-        //    Navigation.PushAsync(new calender(medicineName, selectedEmoji));
-        //}
+        public void NavigateToCalender(string medicineName, string selectedEmoji)
+        {
+           Navigation.PushAsync(new calender(medicineName, selectedEmoji));
+        }
 
     }
 }

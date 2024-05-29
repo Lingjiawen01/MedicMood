@@ -11,6 +11,7 @@
                 <x:String>😊 Happy</x:String>
                 <x:String>😢 Sad</x:String>
                 <x:String>😡 Angry</x:String>
+                <x:String>😐 Poker face</x:String>
                 <!-- Add more mood options as needed -->
             </Picker.Items>
         </Picker>
