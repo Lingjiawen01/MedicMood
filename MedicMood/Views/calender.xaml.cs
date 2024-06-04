@@ -35,8 +35,6 @@ namespace MedicMood.Views
 
         private void LoadEvents()
         {
-            // Clear existing events
-            Events.Clear();
 
             // Get the current date
             var currentDate = DateTime.Now.Date;
